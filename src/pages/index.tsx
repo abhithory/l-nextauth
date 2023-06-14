@@ -1,11 +1,16 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from 'next/router'
 
-const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
+  const router = useRouter()
+
+  const { data: session } = useSession()
+
+
   return (
     <>
       <Head>
@@ -15,7 +20,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-       <h1>this is main page</h1>
+        <h1 className="text-4xl mb-4">this is main page</h1>
+        {session ?
+          <>
+            <h1>User already login</h1>
+          </>
+          :
+          <>
+            <h1>Please sign in first</h1>
+            <button
+            onClick={()=>{
+              router.push("/signin")
+            }}
+              type="button"
+              className="my-5 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
+            >
+              Sign In
+            </button>
+          </>
+        }
       </main>
     </>
   )

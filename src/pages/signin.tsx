@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import { useSession, signIn, signOut } from "next-auth/react"
 
+import { FaGoogle, FaDiscord, FaGithub } from 'react-icons/fa';
+
 
 
 export default function SignIn() {
@@ -21,12 +23,29 @@ export default function SignIn() {
                     <h1>Login is succefully</h1>
                     :
                     <>
-                        <h1>Sign In</h1>
-                        Not signed in <br />
-                        <button onClick={() => signIn()}>Sign in</button>
+                    <SocialSignInButtons />
                     </>
                 }
             </main>
         </>
     )
 }
+
+const SocialSignInButtons = () => {
+    return (
+      <div className="flex flex-col items-center mt-8">
+        <button onClick={()=>signIn("google")} className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300 mb-4 flex items-center">
+          <FaGoogle className="mr-2" />
+          Sign in with Google
+        </button>
+        <button onClick={()=>signIn("discord")} className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300 mb-4 flex items-center">
+          <FaDiscord className="mr-2" />
+          Sign in with Discord
+        </button>
+        <button onClick={()=>signIn("github")} className="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300 flex items-center">
+          <FaGithub className="mr-2" />
+          Sign in with GitHub
+        </button>
+      </div>
+    );
+  };
