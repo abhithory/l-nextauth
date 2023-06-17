@@ -10,6 +10,7 @@ export default function Home() {
 
   const { data: session } = useSession()
 
+console.log(session);
 
   return (
     <>
@@ -24,14 +25,18 @@ export default function Home() {
         {session ?
           <>
             <h1>User already login</h1>
+            <button
+            onClick={()=>signOut()}
+              type="button"
+              className="my-5 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
+            >
+              Sign Out
+            </button>
           </>
           :
           <>
             <h1>Please sign in first</h1>
             <button
-            // onClick={()=>{
-            //   router.push("/signin")
-            // }}
             onClick={()=>signIn()}
               type="button"
               className="my-5 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
